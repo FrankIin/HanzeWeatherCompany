@@ -1,3 +1,13 @@
+<?php
+session_start();
+if (isset($_SESSION['logged-in']) && $_SESSION['logged-in'] == true)
+
+{
+	header('Location: index.php');
+}
+
+?>
+
 <html>
 <!-- import css -->
 <?php include 'footer.html'; ?>
@@ -15,12 +25,12 @@
   
   
   
-  <h1> Lois Builders &trade; </h1>
+  <h1> Login </h1>
   <form action = "process.php"  method="post">
   <!-- send the form to login.php -->
 	
 		<input type="text" name="username" placeholder="Username" required>
-        <input type="password" name="password" placeholder="Password" required>
+        <input type="password" name="password" placeholder="Password" required><br><br>
         <input type="submit" value="Login" >
 		<br>
 

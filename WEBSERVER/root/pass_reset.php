@@ -16,7 +16,7 @@
   
   
   
-  <h1> Lois Builders &trade; </h1>
+  <h1> Reset Password </h1>
   
   <form action = "pass_reset_process.php" method="post">
   <!-- send the form to login.php -->
@@ -24,7 +24,8 @@
 		<input type="text" name="username" placeholder="Username" required>
         <input type="password" name="new_pass" pattern=".{8,}" required title="Minimum 8 characters required." placeholder="Password" required>
 		<input type="password" name="new_pass_confirm" pattern=".{8,}" required title="Minimum 8 characters required." placeholder="Confirm Password" required>
-		
+		<br><br>
 		
         <input type="submit" value="Reset" >
+		<input type="button" class = "btn" value = "Back " onclick= "location.href='login.php';" />
 	

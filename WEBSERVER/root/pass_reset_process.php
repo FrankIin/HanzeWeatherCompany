@@ -20,7 +20,7 @@
   
   {
   echo '
-  <h1> Lois Builders &trade; </h1>
+  <h1> Login </h1>
   
 	Passwords do not match, please try again!
 		
@@ -61,7 +61,7 @@ $password = mysql_real_escape_string($password);
 $query = "UPDATE users SET pass=" .$password . "WHERE username =" .$username;
 
 $result = mysql_query($query);
-$count = mysql_num_rows($result);
+$count = mysql_affected_rows();
 
 
 if($count == 1)

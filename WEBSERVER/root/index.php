@@ -10,11 +10,13 @@ if (isset($_SESSION['logged-in']) && $_SESSION['logged-in'] == true)
 	
 
 	{
-		#echo "Welcome " . $_SESSION['username'];
-		#echo "<html> <button onclick = \"window.location.href='logout.php'\"> Logout </button> </html>";
-		include 'navbar.php';		
+		include 'navbar_home.php';		
 		
-		
+		echo '<br <br> <br>text text text text text text text text
+		text text text text text text text text text text text text text text text text
+		text text text text text text text text text text text text text text text text
+		 text text text text text text text text text text text text text text text text 
+		 text text text text text text text text text text text text text text text text';
 		
 		
 
