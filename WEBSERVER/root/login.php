@@ -8,6 +8,12 @@ if (isset($_SESSION['logged-in']) && $_SESSION['logged-in'] == true)
 
 ?>
 
+
+
+
+
+
+
 <html>
 <!-- import css -->
 <?php include 'footer.html'; ?>
@@ -35,6 +41,7 @@ if (isset($_SESSION['logged-in']) && $_SESSION['logged-in'] == true)
 		<br>
 
 		<h3> <a href = "pass_reset.php">forgot password? </a> </h3>
+		<i>Register a new user? Please contact us.</i>
 	
 	</form>	
   </div>
