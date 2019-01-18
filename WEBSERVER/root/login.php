@@ -30,6 +30,7 @@ $username = mysql_real_escape_string(stripslashes($username));
 $password = mysql_real_escape_string(stripslashes($password));
 
 
+
 $query = "SELECT * FROM $table WHERE username='$username' and pass= '$password'";
 $count = mysql_num_rows(mysql_query($query));
 
@@ -57,7 +58,7 @@ if ($count == 1)
 		header("Location: index.php");
 		
 	}
-	#if user doesn't exist in database (count < 1 )...
+	#if user doesn't exist in database/ wrong password (count < 1 )...
 	
 elseif ($count < 1)
 
