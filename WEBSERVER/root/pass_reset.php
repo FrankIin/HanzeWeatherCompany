@@ -1,11 +1,3 @@
-<html>
-
-<style>
-.error 
-{color: #D12C2C;
- font-size: 25px;
-}
-</style>
 
 <?php
 $newpass = "";
@@ -32,6 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 	elseif ($_POST['new_pass'] != $_POST['new_pass_confirm'] && !($result == 0))
 	
 		{
+			
 			$new_pass_msg = "Passwords do not match, please try again!";	
 		}
 	elseif ($_POST['new_pass'] == $_POST['new_pass_confirm'] && !($result == 0))
@@ -50,7 +43,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 		$new_pass = mysql_real_escape_string(stripslashes($new_pass)); 
 		
 		$passreset_query = mysql_query("UPDATE users SET pass = '$new_pass' WHERE username = '$username'");
-		$new_pass_msg = 'Password successfully updated! You may now login! Click back to return to login page';
+		$new_pass_msg = 'Password successfully updated! You may now login! Click back to return to login page.';
+
 		
 		
 		
@@ -62,7 +56,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
 ?>
 
+<html>
 
+<style>
+.error 
+{color: #D12C2C;
+ font-size: 16px;
+}
+</style>
 
 <!-- include footer + import css -->
 <?php include 'footer.html'; ?>
@@ -81,16 +82,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
   
   
   
-  <h1> Reset Password </h1>
+  <h1> Change Password </h1>
   
   <form action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
   <!-- send the form to login.php -->
 	
 		<input type="text" name="username" placeholder="Username" required>
-        <input type="password" name="new_pass" pattern=".{8,}" required title="Minimum 8 characters required." placeholder="Password" required>
+        <input type="password" name="new_pass" pattern=".{8,}" required title="Minimum 8 characters required." placeholder="New Password" required>
 		<input type="password" name="new_pass_confirm" pattern=".{8,}" required title="Minimum 8 characters required." placeholder="Confirm Password" required>
 		<br><br>
-		<span class = "error"> <?php echo $new_pass_msg . "<br>"; ?> </span>
+		<span class = "error"> <?php echo $new_pass_msg . "<br><br>"; ?> </span>
         <input type="submit" value="Reset" >
 		<input type="button" class = "btn" value = "Back " onclick= "location.href='login.php';" />
 	
