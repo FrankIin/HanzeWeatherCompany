@@ -3,7 +3,7 @@
 <style>
 .error 
 {color: #D12C2C;
- font-size: 30px;
+ font-size: 25px;
 }
 </style>
 

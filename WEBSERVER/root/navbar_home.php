@@ -53,6 +53,8 @@ background-color: #4CAF50;
   <li style="float:right"><font size = 4><a>Welcome <?php echo $_SESSION['username']; ?></a></font></li>
   
 
+  
+
 </ul>
 
 </body>
