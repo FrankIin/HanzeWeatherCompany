@@ -11,8 +11,9 @@ if (isset($_SESSION['logged-in']) && $_SESSION['logged-in'] == true)
 
 	{
 		include 'navbar_home.php';		
-		
-		echo '<br <br> <br>text text text text text text text text
+		include 'gmap.php';
+		echo '
+		<br <br> <br>text text text text text text text text
 		text text text text text text text text text text text text text text text text
 		text text text text text text text text text text text text text text text text
 		 text text text text text text text text text text text text text text text text 
