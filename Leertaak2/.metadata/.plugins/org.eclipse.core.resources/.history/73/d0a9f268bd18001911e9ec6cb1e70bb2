@@ -1,0 +1,38 @@
+package leertaak2;
+
+public class GetXML {
+    private static final int port = 8888;
+    private static final Pattern XML_DECL_PATTERN = Pattern.compile("<\\?xml.*?\\?>");
+    private static final Pattern DATA_PATTERN = 
+        Pattern.compile(".*?</WEATHERDATA>\\s+", Pattern.DOTALL);
+
+    public static void main(String[] args) throws Exception {
+        final ServerSocket serverSocket = new ServerSocket(port);
+        System.out.printf("Listening on %d%n", serverSocket.getLocalPort());
+        final Socket clientSocket = serverSocket.accept();
+        System.out.printf("Processing from %s%n", clientSocket);
+
+        try (Reader sr = new InputStreamReader(clientSocket.getInputStream(), StandardCharsets.ISO_8859_1))
+        {
+            disassemble(sr, new ConvertToPojoAndPrint());
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    private static void disassemble(Reader reader, Consumer<String> xmlConsumer) {
+        final Scanner sc = new Scanner(reader).useDelimiter("\\Z");
+        try {
+            while (true) {
+                final String xml = sc
+                    .skip(XML_DECL_PATTERN)
+                    .findWithinHorizon(DATA_PATTERN, 0);
+                if (xml == null || xml.isEmpty())
+                    break;
+                xmlConsumer.accept(xml);
+            }
+        }
+        catch (Exception e) {
+            throw new IllegalStateException("cannot interpret stream", e);

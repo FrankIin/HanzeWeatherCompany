@@ -1,0 +1,17 @@
+package leertaak2fromscratch;
+
+import java.io.ObjectInputStream;
+import java.net.InetAddress;
+import java.net.Socket;
+
+public class XMLparser {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		InetAddress host = InetAddress.getLocalHost();
+		Socket socket = new Socket("127.0.0.1", 7789);
+		ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+		
+	}
+
+}
