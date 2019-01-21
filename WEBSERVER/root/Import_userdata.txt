@@ -1,0 +1,3 @@
+login to phpmyadmin
+create database "test"
+import users.sql for testing
