@@ -108,10 +108,10 @@ else
 		<input type="text" name="username" placeholder="Username" required><br>
         <input type="password" name="password" placeholder="Password" required><br>
 		<input type="password" name="password_conf" placeholder="Repeat Password" required><br>
-		<span class = "error"> <?php echo $pass_conf_err; ?> </span><br>
+		<?php if ($_SERVER["REQUEST_METHOD"] == "POST") { echo "<span class = \"error\"> $pass_conf_err </span><br>";} ?>
 		<input type = "text" name = "email" placeholder = "E-Mail" required><br>
 		<input type = "text" name = "email_conf" placeholder = "Confirm E-Mail" required ><br>
-		<span class = "error"> <?php echo $email_conf_err; ?> </span><br>
+		<?php if ($_SERVER["REQUEST_METHOD"] == "POST") { echo "<span class = \"error\"> $email_conf_err </span><br>";} ?>
 		<br><br>
 		<span class = "error"> </span>
         <input type="submit" value="Register" >
