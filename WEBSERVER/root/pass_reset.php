@@ -57,6 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 ?>
 
 <html>
+<title> Change Password </title>
 
 <style>
 .error 
@@ -95,3 +96,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         <input type="submit" value="Reset" >
 		<input type="button" class = "btn" value = "Back " onclick= "location.href='login.php';" />
 	
+</body>
+</html>

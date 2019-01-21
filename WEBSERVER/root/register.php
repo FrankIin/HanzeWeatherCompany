@@ -76,6 +76,7 @@ else
 
 
 <html>
+<title> Register </title>
 <style>
 .success 
 {color: #D12C2C;

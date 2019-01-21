@@ -76,6 +76,7 @@ elseif ($count < 1)
 
 
 <html>
+<title> Login </title>
 <!-- import css -->
 <?php include 'footer.html'; ?>
 <link rel="stylesheet" type="text/css" href="style.css">

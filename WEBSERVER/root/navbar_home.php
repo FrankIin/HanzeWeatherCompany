@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<title> Home </title>
 <head>
 
 <style>
@@ -37,13 +38,19 @@ background-color: green;
 background-color: #4CAF50;
 }
 
+.logo_pos
+
+{
+	position: relative;
+	left: 5px;
+}
 
 
 </style>
 </head>
 
 <body>
-<img src = 'logo.jpg' width = 120 height = 50>
+<div class = logo_pos><img src = 'logo.jpg' width = 120 height = 50></div>
 <ul>
 
   <li><a class = "active" href="index.html">Home</a></li>
