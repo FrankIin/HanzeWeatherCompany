@@ -1,9 +1,0 @@
-1547555865375	Convert local variable 'serverSocket' to field
-1547555873909	Extract local variable 'scanner'
-1547555881568	Convert local variable 'scanner' to field
-1547722799035	Delete element
-1547723327773	Convert local variable 'serverSocket' to field
-1547723336802	Extract local variable 'scanner'
-1547723342320	Convert local variable 'scanner' to field
-1547724556026	Move file
-1547728415562	Delete element

@@ -9,7 +9,7 @@ public class DBConnect {
 		Connection Conn=null;
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
-			Conn = DriverManager.getConnection("jdbc:mariadb://localhost:3307/leertaak2?user=root&password=");
+			Conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/leertaak2?user=root&password=");
 			JOptionPane.showMessageDialog(null, "Success");
 			return Conn;
 		}

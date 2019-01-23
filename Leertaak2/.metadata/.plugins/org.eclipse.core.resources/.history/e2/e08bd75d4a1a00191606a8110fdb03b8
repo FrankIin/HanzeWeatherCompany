@@ -1,9 +1,0 @@
-package testingleertaak2;
-
-public class ParsingXML {
-
-	public static void main(String[] args) {
-		// OK
-	}
-	
-}

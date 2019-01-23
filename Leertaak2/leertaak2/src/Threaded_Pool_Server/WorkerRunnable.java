@@ -5,6 +5,10 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringReader;
 import java.nio.charset.StandardCharsets;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Scanner;
 import java.util.function.Consumer;
 import java.util.regex.Pattern;
@@ -17,7 +21,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 
 public class WorkerRunnable implements Runnable{
-	
+
+	protected static Connection myConn = null;
+    protected static Statement myStmt = null;
 	protected String STN;
     protected Socket clientSocket = null;
     protected String serverText   = null;
@@ -89,7 +95,7 @@ public class WorkerRunnable implements Runnable{
         @XmlElement(name = "MEASUREMENT")
         Measurement measurement;
         @Override
-        public String toString() { return "WeerData: " + measurement; }
+        public String toString() { return "STN: " + measurement; }
     }
 
     private static class Measurement
@@ -104,17 +110,48 @@ public class WorkerRunnable implements Runnable{
         @XmlElement(name="VISIB") String visib;
         @XmlElement(name="WDSP") String wdsp;
         @XmlElement(name="PRCP") String prcp;
-        @XmlElement(name="SDNP") String sdnp;
+        @XmlElement(name="SNDP") String sdnp;
         @XmlElement(name="FRSHTT") String frshtt;
         @XmlElement(name="CLDC") String cldc;
-        @XmlElement(name="WNDDIR") String winddir;
+        @XmlElement(name="WNDDIR") String wnddir;
         
         @Override
-        public String toString() {getSTN(stn,temp); return "[stn=" + stn + "]\t [temp=" + temp+ "]";}
+        public String toString() {try {
+			sendAll(stn,temp,date,time,dewp,stp,slp,visib,wdsp,prcp,sdnp,frshtt,cldc,wnddir);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  //System.out.println(stn+ ","+temp+ ","+date+ ","+time+ ","+dewp+ ","+stp+ ","+slp+ ","+visib+ ","+wdsp+ ","+prcp+ ","+sdnp+ ","+frshtt+ ","+cldc+ ","+wnddir); 
+        return stn + " verstuurd naar database!";} 
        
     }
     
-    public static void getSTN(int STN, String TEMP) {
-    	System.out.println(STN + TEMP);
+    public static void sendAll(int STN, String TEMP, String DATE, String TIME, String DEWP, String STP, String SLP, String VISIB, String WDSP, String PRCP, String SDNP, String FRSHTT, String CLDC, String WNDDIR) throws SQLException {
+    	if (PRCP.isEmpty()) {PRCP = "0";}
+    	if (SDNP.isEmpty()) {SDNP = "0";}
+    	if (FRSHTT.isEmpty()) {FRSHTT = "0";}
+    	if (DEWP.isEmpty()) {DEWP = "0";}
+    	if (STP.isEmpty()) {STP = "0";}
+    	if (SLP.isEmpty()) {SLP = "0";}
+    	if (CLDC.isEmpty()) {CLDC = "0";}
+    	if (WNDDIR.isEmpty()) {WNDDIR = "0";}
+    	if (VISIB.isEmpty()) {VISIB = "0";}
+    	if (WDSP.isEmpty()) {WDSP = "0";}
+
+    	try {
+			//1. Get a connection to the database
+			myConn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/leertaak2", "root", "");
+			//2. Create a statement
+			myStmt = myConn.createStatement();
+			//3. Execute SQL query
+			String sql = "replace into leertaak2.measurements (`STN`, `TEMP`, `DATE`, `TIME`, `DEWP`, `STP`, `SLP`, `VISIB`, `WDSP`, `PRCP`, `SDNP`, `FRSHTT`, `CLDC`, `WNDDIR`)"
+					+ "VALUES ('"+STN+"', '"+TEMP+"', '"+DATE+"', '"+TIME+"', '"+DEWP+"', '"+STP+"', '"+SLP+"', '"+VISIB+"', '"+WDSP+"', '"+PRCP+"', '"+SDNP+"', '"+FRSHTT+"', '"+CLDC+"', '"+WNDDIR+"')";
+			
+			myStmt.executeUpdate(sql);	
+		}finally {
+            myStmt.close();
+            myConn.close();
+		}
+    	
     }
 }
