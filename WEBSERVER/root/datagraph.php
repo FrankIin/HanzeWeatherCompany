@@ -8,8 +8,8 @@
 	position: absolute;
 	display: inline-block;
 	text-align: center;
-	width: 42%;
-	height: 45%;
+	width: 47%;
+	height: 55%;
 	right: 2%;
 	
 	
