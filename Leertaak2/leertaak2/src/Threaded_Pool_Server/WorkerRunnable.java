@@ -24,14 +24,12 @@ public class WorkerRunnable implements Runnable{
 
 	protected static Connection myConn = null;
     protected static Statement myStmt = null;
-	protected String STN;
     protected Socket clientSocket = null;
     protected String serverText   = null;
     private static final Pattern XML_DECL_PATTERN = Pattern.compile("<\\?xml.*?\\?>");
     private static final Pattern DATA_PATTERN = 
         Pattern.compile(".*?</WEATHERDATA>\\s+", Pattern.DOTALL);
 	private static Scanner scanner;
-	static int cijfer = 0;
 
     public WorkerRunnable(Socket clientSocket, String serverText) {
         this.clientSocket = clientSocket;
@@ -41,7 +39,9 @@ public class WorkerRunnable implements Runnable{
     public void run() {
         try (Reader sr = new InputStreamReader(clientSocket.getInputStream(), StandardCharsets.ISO_8859_1))
         {
-            disassemble(sr, new ConvertToPojoAndPrint());
+        	System.out.println(clientSocket.getInputStream());
+                disassemble(sr, new ConvertToPojoAndPrint());
+
         }
         catch (Exception e)
         {
@@ -81,6 +81,7 @@ public class WorkerRunnable implements Runnable{
         public void accept(String xml) {
             try {
                 final WeatherData weatherData = (WeatherData) unmarshaller.unmarshal(new StringReader(xml));
+
                 System.out.println(weatherData);
             }
             catch (Exception e) {
@@ -116,12 +117,12 @@ public class WorkerRunnable implements Runnable{
         @XmlElement(name="WNDDIR") String wnddir;
         
         @Override
-        public String toString() {try {
+        public String toString() {/*try {
 			sendAll(stn,temp,date,time,dewp,stp,slp,visib,wdsp,prcp,sdnp,frshtt,cldc,wnddir);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}  //System.out.println(stn+ ","+temp+ ","+date+ ","+time+ ","+dewp+ ","+stp+ ","+slp+ ","+visib+ ","+wdsp+ ","+prcp+ ","+sdnp+ ","+frshtt+ ","+cldc+ ","+wnddir); 
+		} */ //System.out.println(stn+ ","+temp+ ","+date+ ","+time+ ","+dewp+ ","+stp+ ","+slp+ ","+visib+ ","+wdsp+ ","+prcp+ ","+sdnp+ ","+frshtt+ ","+cldc+ ","+wnddir); 
         return stn + " verstuurd naar database!";} 
        
     }
