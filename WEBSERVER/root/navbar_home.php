@@ -62,7 +62,7 @@ background-color: #4CAF50;
 <div class = "logo_pos"><img src = 'logo.jpg' width = 120 height = 50></div>
 <ul>
 
-  <li><a class = "active" href="index.html">Home</a></li>
+  <li><a class = "active" href="index.php">Home</a></li>
   <li><a href="about.html">About</a></li>
   <li><a href="contact.html">Contact</a></li>
   <li style="float:right"><a href = "logout.php"><img src = "logout_btn.png" style="width:25px;height:21px;"></a></li>

@@ -50,7 +50,7 @@ if ($count == 1)
 		session_start();
 		
 		$_SESSION['logged-in'] = true;
-
+		
 		while ($row = mysql_fetch_assoc($query_login)) {
 		$_SESSION['username'] = $row['username'];}
 

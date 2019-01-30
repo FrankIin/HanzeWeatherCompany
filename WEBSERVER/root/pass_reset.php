@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 ?>
 
 <html>
-<title> Change Password </title>
+<title> Reset Password </title>
 
 <style>
 .error 
@@ -83,7 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
   
   
   
-  <h1> Change Password </h1>
+  <h1> Reset Password </h1>
   
   <form action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
   <!-- send the form to login.php -->
