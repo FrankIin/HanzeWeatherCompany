@@ -5,15 +5,17 @@ public class Extrapolate{
 		
 	//creates a linear equation based on previous data and it's used to predict a future value
 	public int returnExtra(int prevValues[]){
-		//calculates the total difference between all the measured points compared to their previous point 
-		for (int i = 0; i < prevValues.length; i++){
-			if(i > 0){ 
-				totDif += prevValues[i] - prevValues[i-1];
+		if(prevValues.length > 0) {
+			//calculates the total difference between all the measured points compared to their previous point 
+			for (int i = 0; i < prevValues.length; i++){
+				if(i > 0){ 
+					totDif += prevValues[i] - prevValues[i-1];
+				}
 			}
-		}
 	
-		int directionalCoefficient = totDif/prevValues.length;
-		extraValue = directionalCoefficient * prevValues.length + prevValues[0];
+			int directionalCoefficient = totDif/prevValues.length;
+			extraValue = directionalCoefficient * prevValues.length + prevValues[0];
+		}
 		return extraValue;
 	}
 }
