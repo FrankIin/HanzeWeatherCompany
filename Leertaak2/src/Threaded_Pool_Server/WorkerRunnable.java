@@ -101,7 +101,7 @@ public class WorkerRunnable implements Runnable{
 
     private static class Measurement
     {
-        @XmlElement(name = "STN") int stn;
+        @XmlElement(name = "STN") String[] stn;
         @XmlElement(name="TEMP") String temp;
         @XmlElement(name="DATE") String date;
         @XmlElement(name="TIME") String time;
@@ -123,7 +123,7 @@ public class WorkerRunnable implements Runnable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} */ //System.out.println(stn+ ","+temp+ ","+date+ ","+time+ ","+dewp+ ","+stp+ ","+slp+ ","+visib+ ","+wdsp+ ","+prcp+ ","+sdnp+ ","+frshtt+ ","+cldc+ ","+wnddir); 
-        return stn + " verstuurd naar database!";} 
+        return stn[0];} 
        
     }
     
