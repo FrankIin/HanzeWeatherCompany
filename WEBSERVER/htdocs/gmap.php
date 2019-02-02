@@ -441,7 +441,7 @@ map.controls[google.maps.ControlPosition.TOP_CENTER].push(medt_div);
 
 
 
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPk6hqSSg0aQodv34GS3xd8sxsYH0-s8I&callback=initMap"
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap"
   type="text/javascript"></script>
 
 </body>
