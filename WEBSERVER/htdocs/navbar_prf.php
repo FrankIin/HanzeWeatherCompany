@@ -63,7 +63,7 @@ background-color: #4CAF50;
 <ul>
 
   <li><a href="index.php">Home</a></li>
-  <li><a class = "active" href="profile.php">Profile</a></li>
+  <li><a class = "active" href="prf.php">Profile</a></li>
   <li><a href="contact.html">Contact</a></li>
   <li style="float:right"><a href = "logout.php"><img src = "logout_btn.png" style="width:25px;height:21px;"></a></li>
   <div class = "welcome_user"><i><font size = 4><a>Welcome <?php echo $_SESSION['username']; ?></a></font></i></div>

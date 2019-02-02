@@ -34,9 +34,13 @@ else
 
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  position: relative;
+  top: 5%;
   max-width: 300px;
   margin: auto;
   text-align: center;
+  border: 3px solid #73AD21;
+
 }
 
 .title {
