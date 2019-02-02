@@ -1,0 +1,37 @@
+Work so far + instructions:
+
+* DATABASE CONNECTION (tested and working)
+* PAGE REDIRECTIONS (tested and working)
+* LOGIN (tested and working)
+* FORM VALIDATION AND PROCESSING (tested and working)
+* PASS RESET (tested and working)
+* MAIN PAGE (basic page for now, work in progress)
+* USER REGISTRATION (tested and working, may be improved later)
+* GOOGLE MAPS INTEGRATION (TESTED AND WORKING)
+* WEATHER DATA DISPLAY (Working with random generated data)
+* ABOUT PAGE (not yet)
+* PASSWORD ENCRYPTION (Tested and working)
+
+To use the website:
+
+Install XAMPP
+open XAMPP dir
+paste all the contents in htdocs
+start Apache, MySQL
+
+Testing the website:
+
+
+* From browser:
+localhost
+
+* Registering a new user:
+
+localhost/register.php
+
+
+Test users:
+
+Make sure to import users.sql and configure database connections accordingly (grant admin all permissions in order for database connection to work)
+
+SEE testlogin_info.txt for test users.
