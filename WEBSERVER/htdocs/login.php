@@ -52,6 +52,9 @@ if ($count == 1)
 	{
 		$hash = $row['pass'];
 		$_SESSION['username'] = $row['username'];
+		$_SESSION['full_name'] = $row['full_name'];
+		$_SESSION['email'] = $row['email'];
+		
 		
 		if (password_verify($password_plain, $hash))
 		{
