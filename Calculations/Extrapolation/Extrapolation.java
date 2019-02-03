@@ -14,7 +14,7 @@ public class Extrapolation{
 			}
 	
 			int directionalCoefficient = totDif/prevValues.length;
-			extraValue = directionalCoefficient * prevValues.length + prevValues[0];
+			extraValue = directionalCoefficient * (prevValues.length + 1) + prevValues[0];
 		}
 		return extraValue;
 	}
