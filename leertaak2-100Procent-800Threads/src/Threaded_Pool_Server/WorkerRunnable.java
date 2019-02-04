@@ -58,27 +58,13 @@ public class WorkerRunnable implements Runnable{
                     .findWithinHorizon(DATA_PATTERN, 0);
                 if (xml == null || xml.isEmpty())
                     break;
-                accept(xml);
+                XMLParser(xml);
             }
         }
         catch (Exception e) {
             throw new IllegalStateException("cannot interpret stream", e);
         }
     }
-
-
-
-        public static void accept(String xml) {
-            try {
-            	//System.out.println(xml);
-            	XMLParser(xml);
-                //final WeatherData weatherData = (WeatherData) unmarshaller.unmarshal(new StringReader(xml));
-                //System.out.println(weatherData);
-            }
-            catch (Exception e) {
-                throw new IllegalStateException(e);
-            }
-        }
 
 	private static void XMLParser(String value) throws ParserConfigurationException, SAXException, IOException {
 	    DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -93,14 +79,14 @@ public class WorkerRunnable implements Runnable{
 
 	      NodeList stn = element.getElementsByTagName("STN");
 	      Element stnline = (Element) stn.item(0);
-	      //System.out.println("STN: " + getCharacterDataFromElement(stnline));
-	      NodeList temp = element.getElementsByTagName("TEMP");
-	      Element templine = (Element) temp.item(0);
-	      //System.out.println("TEMP: " + getCharacterDataFromElement(templine));
-	      NodeList dewp = element.getElementsByTagName("DEWP");
-	      Element dewpline = (Element) dewp.item(0);
-	      //System.out.println("TEMP: " + getCharacterDataFromElement(dewpline));
-	      sendData(getCharacterDataFromElement(stnline),(getCharacterDataFromElement(templine)),(getCharacterDataFromElement(dewpline)));
+			if (hashMapCountries.getSTN(Integer.parseInt(getCharacterDataFromElement(stnline)))) {
+				
+		      NodeList temp = element.getElementsByTagName("TEMP");
+		      Element templine = (Element) temp.item(0);
+		      NodeList dewp = element.getElementsByTagName("DEWP");
+		      Element dewpline = (Element) dewp.item(0);
+		      sendData(getCharacterDataFromElement(stnline),(getCharacterDataFromElement(templine)),(getCharacterDataFromElement(dewpline)));
+	    }
 	    }
 		}
 		
@@ -115,9 +101,7 @@ public class WorkerRunnable implements Runnable{
 		}
 	public static void sendData(String stn, String temp, String dewp) {
 		if (dewp.isEmpty()) {dewp = "0";}		
-		if (hashMapCountries.getSTN(Integer.parseInt(stn))) {
 			new WriteToCSV(stn,temp,Humidity.calcHumidity(Double.parseDouble(temp), Double.parseDouble(dewp)),hashMapCountries.getCountry(Integer.parseInt(stn)));
-		}
 		
 	}
 }
