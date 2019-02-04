@@ -114,7 +114,10 @@ public class WorkerRunnable implements Runnable{
 		
 		}
 	public static void sendData(String stn, String temp, String dewp) {
+		if (dewp.isEmpty()) {dewp = "0";}		
+		if (hashMapCountries.getSTN(Integer.parseInt(stn))) {
+			new WriteToCSV(stn,temp,Humidity.calcHumidity(Double.parseDouble(temp), Double.parseDouble(dewp)),hashMapCountries.getCountry(Integer.parseInt(stn)));
+		}
 		
-		new Humidity(stn,temp,dewp);
 	}
 }

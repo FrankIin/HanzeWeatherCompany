@@ -6,14 +6,14 @@ import java.io.PrintWriter;
 
 public class WriteToCSV {
 	String filepath = "data.csv";
-	public WriteToCSV(String stn, String temp, String dewp) {
+	public WriteToCSV(String stn, String temp, String dewp, String country) {
 		// TODO Auto-generated constructor stub
 		try 
 		{
 			FileWriter fw = new FileWriter(filepath,true);
 			BufferedWriter bw = new BufferedWriter(fw);
 			PrintWriter pw = new PrintWriter(bw);
-			pw.println(stn + "," + temp + "," + dewp);
+			pw.println(stn + "," + country + "," + temp + "," + dewp);
 			pw.flush();
 			pw.close();
 			
