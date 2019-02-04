@@ -5,8 +5,8 @@ $new_pass_msg = "";
 
 		
 	$host = "localhost";
-	$username_db = "admin";
-	$password_db = "z5IxP5QJUrGurmtC";
+	$username_db = "root";
+	$password_db = "H@nzeweather1";
 	$db = "test";
 	$table = "users";
 

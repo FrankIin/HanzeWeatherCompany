@@ -12,8 +12,8 @@ elseif  ($_SERVER["REQUEST_METHOD"] == "POST")
 {
 #initialize the variables necessary for database connection.
 $host = "localhost";
-$username_db = "admin";
-$password_db = "z5IxP5QJUrGurmtC";
+$username_db = "root";
+$password_db = "H@nzeweather1";
 $db = "test";
 $table = "users";
 
@@ -61,6 +61,10 @@ if ($count == 1)
 			$_SESSION['logged-in'] = true;
 			header("Location: index.php");
 		}
+		else
+		{
+			$login_error = "<b>Wrong Password, Please try again! </b>";
+		}
 		
 	}
 	
@@ -68,12 +72,12 @@ if ($count == 1)
 	
 	
 	}
-	#if user doesn't exist in database/ wrong password (count < 1 )...
+	#if user doesn't exist in database
 	
 elseif ($count < 1)
 
 {
-	$login_error = "<b>Login Failed due to one of the following reasons: <br> &#8226; Invalid Username <br> &#8226; Invalid Password <br><br> Please try again!</b>";
+	$login_error = "<b>Username doesn't exist! <br><br> Please try again!</b>";
 }
 
 }

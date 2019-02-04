@@ -52,7 +52,11 @@ echo "<div class = 'center'> <div id='avgtmp'></div>
 }
 ?>
 
-<button class='button' onclick ="window.location.href='/index.php'"> Back </button>
+<!--<button class='button' onclick ="window.location.href='/index.php'"> Back </button> -->
+<!--<button class='button'> <a href = "/" download = "users.sql"> Download </button> -->
+<!--<a href = "/" download = "users.sql"> <button class = 'button'> Download </button> -->
+
+<button class = 'button' onclick = "download(vals_avgtmp,'<?php echo $_GET['country'] . '(temps).csv' ?>'); download(vals_avghmd,'<?php echo $_GET['country'] . '(humd).csv' ?>')"> Download </button>
 
 </body>
 
@@ -132,6 +136,28 @@ $country = $_GET['country'];
 
 <script>
 
+function download(data, filename, type) {
+    var file = new Blob([data], {type: type});
+    if (window.navigator.msSaveOrOpenBlob) // IE10+
+        window.navigator.msSaveOrOpenBlob(file, filename);
+    else { // Others
+        var a = document.createElement("a"),
+                url = URL.createObjectURL(file);
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function() {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);  
+        }, 0); 
+    }
+}
+
+
+
+
+
 //Generate Random Values
 function GenRandInt(min, max, how_many) 
 {
@@ -152,7 +178,8 @@ function GenRandInt(min, max, how_many)
 }
 
 
-	
+var vals_avgtmp = GenRandInt(0,20,24);
+var vals_avghmd = GenRandInt(60,99,24);	
 
 var country = "<?php echo $country ?>";
 
@@ -176,7 +203,7 @@ var histView = {
   },
   "series": [
     
-	{"values": GenRandInt(0,20,24)},
+	{"values": vals_avgtmp},
 	//values 1
       //{"values": [5,3,2,1,3,4,2,3,7,6,4,8,13,10,12,15,17,13,11,12,12,10,6,4]},
 	//values 2
@@ -324,7 +351,7 @@ var avghmd = {
   "series": [
     //values 1
 	
-      {"values": GenRandInt(60,99,24)},
+      {"values": vals_avghmd},
 	//values 2
 	//{"values": [1,2,3,4,5,6,5,4,7,5,6,5,4,5,7,3,1,2,3,2,2,3,1,2]}
 	

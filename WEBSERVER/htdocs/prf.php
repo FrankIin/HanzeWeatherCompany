@@ -63,7 +63,7 @@ else
   <img src="blank_prf.jpg" alt="Blank Profile Pic" style="width:100%">
   <h1><?php echo $_SESSION['full_name']; ?></h1>
   <h3><?php echo $_SESSION['email']; ?> </h3>
-  <p class="title">Administrator</p>
+  <p class="title">User</p>
   <p>Hanze University Groningen</p><br>
   
   
