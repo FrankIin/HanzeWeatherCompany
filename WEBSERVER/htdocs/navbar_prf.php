@@ -62,9 +62,9 @@ background-color: #4CAF50;
 <div class = "logo_pos"><a href = "index.php"><img src = 'logo.jpg' width = 120 height = 50></a></div>
 <ul>
 
-  <li><a href="index.php">Home</a></li>
-  <li><a class = "active" href="prf.php">Profile</a></li>
-  <li style="float:right"><a href = "logout.php"><img src = "logout_btn.png" style="width:25px;height:21px;"></a></li>
+  <span title = "Home Page"> <li><a href="index.php">Home</a></li></span>
+  <span title = "View Profile"><li><a class = "active" href="prf.php">Profile</a></li></span>
+  <span title = "Logout"><li style="float:right"><a href = "logout.php"><img src = "logout_btn.png" style="width:25px;height:21px;"></a></li></span>
   <div class = "welcome_user"><i><font size = 4><a>Welcome <?php echo $_SESSION['username']; ?></a></font></i></div>
 
   

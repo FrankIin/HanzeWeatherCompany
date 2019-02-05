@@ -116,9 +116,9 @@ elseif ($count < 1)
   
   <h1> Login </h1>
   <form action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>"  method="post">
-  <!-- send the form to login.php -->
+  <!-- send the form to login.php (the document itself) -->
 	
-		<input type="text" name="username" placeholder="Username" required>
+		<input type="text" name="username" placeholder="Username" <?php if ($_SERVER["REQUEST_METHOD"] == "POST") {echo "value = " . $_POST['username']; } ?> required>
         <input type="password" name="password" placeholder="Password" required><br><br>
 		<span class = "error"> <?php echo $login_error . '<br><br>' ?> </span>
         <input type="submit" value="Login" >

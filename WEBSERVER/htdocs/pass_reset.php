@@ -94,7 +94,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
   <form action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
   <!-- send the form to login.php -->
 	
-		<input type="text" name="username" placeholder="Username" required>
+		<input type="text" name="username" placeholder="Username" <?php if ($_SERVER["REQUEST_METHOD"] == "POST") {echo "value = " . $_POST['username'];} ?> required>
         <input type="password" name="new_pass" pattern=".{8,}" required title="Minimum 8 characters required." placeholder="New Password" required>
 		<input type="password" name="new_pass_confirm" pattern=".{8,}" required title="Minimum 8 characters required." placeholder="Confirm Password" required>
 		<br><br>
