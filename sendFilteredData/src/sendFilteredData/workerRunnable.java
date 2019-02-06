@@ -71,7 +71,6 @@ public class workerRunnable implements Runnable {
 				// DOORSTUREN NAAR VIRTUAL MACHINE
 				//System.out.println(getCharacterDataFromElement(stnline) + ", " + getCharacterDataFromElement(templine) + ", " + getCharacterDataFromElement(dewpline) + ", " + getCharacterDataFromElement(timeline) + "," + hashMapCountries.getCountry(Integer.parseInt(getCharacterDataFromElement(stnline))));
 			}
-
 		}
 	}
 
