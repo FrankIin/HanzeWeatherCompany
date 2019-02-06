@@ -25,7 +25,8 @@ public class workerRunnable implements Runnable {
 		this.clientSocket = clientSocket;
 	}
 
-	public void run() {
+	public void run() 
+	{
 		ByteArrayOutputStream result = new ByteArrayOutputStream();
 		byte[] buffer = new byte[3370];
 		int length;
@@ -33,6 +34,7 @@ public class workerRunnable implements Runnable {
 			while ((length = clientSocket.getInputStream().read(buffer)) != -1) {
 				result.write(buffer, 0, (length-1));
 				XMLParser(result.toString());
+				//System.out.println(result.toString());
 				result = new ByteArrayOutputStream();
 			}
 		} catch (IOException e) {
@@ -42,7 +44,6 @@ public class workerRunnable implements Runnable {
 		} catch (SAXException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	public static void XMLParser(String value) throws ParserConfigurationException, SAXException, IOException {
@@ -53,7 +54,8 @@ public class workerRunnable implements Runnable {
 		Document doc = db.parse(is);
 		NodeList nodes = (doc.getElementsByTagName("MEASUREMENT"));
 
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 10; i++) 
+		{
 			Element element = (Element) nodes.item(i);
 
 			NodeList stn = element.getElementsByTagName("STN");
