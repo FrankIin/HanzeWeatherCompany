@@ -13,9 +13,10 @@ public class Humidity {
 		return ReHum;
 	}
 	
-	public double calcHumidity() {
+	/* The client requested relative humidity so we do not need absolute humidity 
+	 * public double calcHumidity() {
 		//calculates the absolute humidity using temperature and the relative humidity
 		Humidity = (6.112*exp((17.67*Temp)/(Temp+243.5))*reHumidity()*2.1674)/(273.15+Temp);
 		return Humidity;
-	}
+	}*/
 }
