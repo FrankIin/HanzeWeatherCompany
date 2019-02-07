@@ -34,7 +34,6 @@ public class workerRunnable implements Runnable {
 			while ((length = clientSocket.getInputStream().read(buffer)) != -1) {
 				result.write(buffer, 0, (length-1));
 				XMLParser(result.toString());
-				//System.out.println(result.toString());
 				result = new ByteArrayOutputStream();
 			}
 		} catch (IOException e) {
@@ -67,9 +66,8 @@ public class workerRunnable implements Runnable {
 				Element dewpline = (Element) dewp.item(0);
 				NodeList time = element.getElementsByTagName("TIME");
 				Element timeline = (Element) time.item(0);
-				// new writeToCSV(getCharacterDataFromElement(stnline), getCharacterDataFromElement(templine), getCharacterDataFromElement(dewpline), getCharacterDataFromElement(timeline), hashMapCountries.getCountry(Integer.parseInt(getCharacterDataFromElement(stnline))));
-				// DOORSTUREN NAAR VIRTUAL MACHINE
-				//System.out.println(getCharacterDataFromElement(stnline) + ", " + getCharacterDataFromElement(templine) + ", " + getCharacterDataFromElement(dewpline) + ", " + getCharacterDataFromElement(timeline) + "," + hashMapCountries.getCountry(Integer.parseInt(getCharacterDataFromElement(stnline))));
+				sendData(getCharacterDataFromElement(stnline),getCharacterDataFromElement(templine),getCharacterDataFromElement(dewpline),
+						getCharacterDataFromElement(timeline),hashMapCountries.getCountry(Integer.parseInt(getCharacterDataFromElement(stnline))));
 			}
 		}
 	}
@@ -82,5 +80,11 @@ public class workerRunnable implements Runnable {
 		}
 		return "";
 
+	}
+	
+	public static void sendData(String stn, String temp, String dewp, String time, String country) {
+		//new writeToCSV(stn,temp,dewp,time,country);
+		//System.out.println(stn + ", " + temp + ", " + dewp + ", " + time + ", " + country);
+		//DOORSTUREN NAAR VIRTUAL MACHINE
 	}
 }

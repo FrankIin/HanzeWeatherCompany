@@ -7,12 +7,12 @@ import java.io.PrintWriter;
 public class writeToCSV {
 	String filepath = "data.csv";
 
-	public writeToCSV(String stn, String temp, String dewp, String time) {
+	public writeToCSV(String stn, String temp, String dewp, String time, String country) {
 		try {
 			FileWriter fw = new FileWriter(filepath, true);
 			BufferedWriter bw = new BufferedWriter(fw);
 			PrintWriter pw = new PrintWriter(bw);
-			pw.println(stn + "," + temp + "," + dewp + "," + time);
+			pw.println(stn + "," + temp + "," + dewp + "," + time + "," + country);
 			pw.flush();
 			pw.close();
 
