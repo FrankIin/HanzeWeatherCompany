@@ -1,0 +1,13 @@
+//run code every five seconds
+watch -n 5 ./sendData.sh
+
+//sending data to ftp server
+cd /root/Parser/GeneratorPi/src/
+mv data.txt sendData.txt
+sftp -b ./sftpCode.sh rasppi@40.115.55.237
+rm sendData.txt
+
+//sftp batch bestand
+cd /ftp/weatherdata/
+put sendData.txt
+bye
