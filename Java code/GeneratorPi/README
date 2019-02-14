@@ -1,0 +1,35 @@
+ONTHOUD : 1 INPUTSTREAM(CLUSTER) IS 1 VOLLEDIG XML BESTAND
+DIT BESTAND BEGINT MET
+<?xml version="1.0"?>
+<WEATHERDATA>
+<DATA VAN 10 WEERSTATIONS>
+EN EINDIGT MET
+</WEATHERDATA>
+DIT IS WAT 1 CLUSTER PER SECONDE VERSTUURD.
+
+Het probleem:
+de class workerRunnable houdt variable "a" bij.
+elke keer als er een inputstream binnenkomt van de generator (dat is bij 800 clusters dus 800 keer per seconde) dan wordt a verhoogt.
+-> elke inputstream wordt opgeslagen in een StringBuilder met .append
+wanneer a gelijk is aan 4000 (dus 4000 clusters in totaal -> 5 seconden aan data) dan wordt gehele StringBuilder met 4000 clusters gescreven naar een .txt bestand.
+
+nadat alles data is geschreven naar een .txt bestand wordt dit geopend door Runner.java.
+Runner.java zorgt ervoor dat bij de 4000 inputstreams, alle beginstukken en eind stukken worden weggehaald.
+-> dit is dus <?xml version="1.0"?>, <WEATHERDATA> en </WEATHERDATA> en dit word alleen bij het begin en het eind van het GEHELE .txt bestand toegevoegd.
+nu heb je dus 1 compleet XML bestand met 40000 weerstations gegevens en dit kan je dus in 1 keer in de XMLParser gooien ipv 4000 keer individueel wat zorgt voor problemen.
+
+het GEHELE bestand met 40000 weerstations kan daarna bij het project VirtualMachineRunner (wat wordt gedraaid op de VM) geparsed worden met XMLParser2.java.
+De XMLParser2 houdt in dat alleen de weerstations vervolgens in een .csv bestand komen die wij nodig hebben (dus Europa en middelandse zee) en de benodigde data
+-> STN, TEMP, DEWP, TIME, COUNTRY
+
+dit is dus hoe het zou moeten werken, maar waar het fout gaat is al het aanmaken van een .txt bestand met 4000 inpustreams (dus wanneer a = 4000).
+Je kan zelf even kijken wat er fout gaat: 
+Run -> Runserver.java (GeneratorPi)
+Wanneer (That took ... miliseconds) in je console verschijnt betekent dat 4000 clusters zijn toegeveogd in een .txt bestand. STOP de generator en Runserver.java
+(Na 5 seconden zou namelijk automatisch dit .txt bestand door verstuurd worden naar de Virtual Machine, maar omdat dit lokaal is moet je zelf maar de generator en Runserver.java stop zetten)
+Sleep het aangemaakte .txt bestand naar het project VirtualMachineRunner.
+Run -> XMLParser2 (VirtualMachineRunner) en je zult zien dat het errors geeft.
+Het aangemaakte .txt bestand bij de Generator (dus met 4000 clusters) heeft niet perfect alle data naar het .txt bestand geschreven en dus werkt al deze bs niet meer
+
+Het probleem is dus dat het een corrupt .txt bestand aanmaakt bij de Generator die de XMLParser natuurlijk niet volledig kan uitlezen.
+

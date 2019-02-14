@@ -16,6 +16,7 @@ import org.xml.sax.SAXException;
 
 public class XMLParser {
 	protected String value;
+	static StringBuilder sb = new StringBuilder();
 	
 	public XMLParser(String value){
 		this.value = value;
@@ -27,30 +28,25 @@ public class XMLParser {
 
 			Document doc = db.parse(is);
 			NodeList nodes = (doc.getElementsByTagName("MEASUREMENT"));
-			for (int i = 0; i < 10; i++) 
+			for (int i = 0; i < nodes.getLength(); i++) 
 			{
 				Element element = (Element) nodes.item(i);
-				NodeList stn = element.getElementsByTagName("STN");
-				Element stnline = (Element) stn.item(0);
+				Element stnline = (Element) element.getElementsByTagName("STN").item(0);
 				if (hashMapCountries.getSTN(Integer.parseInt(getCharacterDataFromElement(stnline)))) {
-				NodeList temp = element.getElementsByTagName("TEMP");
-				Element templine = (Element) temp.item(0);
-				NodeList dewp = element.getElementsByTagName("DEWP");
-				Element dewpline = (Element) dewp.item(0);
-				NodeList time = element.getElementsByTagName("TIME");
-				Element timeline = (Element) time.item(0);
+				Element templine = (Element) element.getElementsByTagName("TEMP").item(0);
+				Element dewpline = (Element) element.getElementsByTagName("DEWP").item(0);
+				Element timeline = (Element) element.getElementsByTagName("TIME").item(0);
 				sendData(getCharacterDataFromElement(stnline),getCharacterDataFromElement(templine),getCharacterDataFromElement(dewpline),getCharacterDataFromElement(timeline), hashMapCountries.getCountry(Integer.parseInt(getCharacterDataFromElement(stnline))));
 				}
 				
 			}
+			new writeToTXT(sb.toString());
+			sb = new StringBuilder();
 		} catch (ParserConfigurationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SAXException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -67,6 +63,7 @@ public class XMLParser {
 		
 		public static void sendData(String stn, String temp, String dewp, String time, String country) {
 			new writeToCSV(stn,temp,dewp,time,country);
+			sb.append(stn + "," + temp + "," + dewp + "," + time + "," + country + "\r\n");
 		}
 
 
