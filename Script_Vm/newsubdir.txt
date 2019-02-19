@@ -1,0 +1,3 @@
+#!/bin/bash
+
+mkdir /home/rasppi/ftp/weatherdata/auto_update/"$(date +%Y-%m-%d)"/"$(date +%H:%M)"/
