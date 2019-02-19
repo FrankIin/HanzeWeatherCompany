@@ -18,4 +18,29 @@ public class Extrapolation{
 		}
 		return extraValue;
 	}
+	
+	//check if the currentValue is within the required bounds, return false if it falls within bounds
+	//in this case the bounds are set to be a difference of 20%, both in increase and decrease
+	public boolean valueWrong(int prevValue, int currentValue) {
+		boolean checkValue = true;
+		double maxDiffAllowed = 0.2;
+		//difference cannot be calculated correctly when prevValue == 0
+		if(prevValue != 0) {
+			//calculates the difference between preValue and currentValue
+			double difference = (currentValue-prevValue)/Math.abs(prevValue);
+			
+			if(difference > maxDiffAllowed || difference < -maxDiffAllowed) {
+				//check that should be removed
+				System.out.println("Value"+ currentValue + "does not fall within bounds of" + prevValue);
+			}
+			else {
+				checkValue = false;
+			}
+		}
+		else {
+			System.out.println("Previous value was" + prevValue + "so the difference could not be calculated");
+		}
+		
+		return checkValue;
+	}
 }
