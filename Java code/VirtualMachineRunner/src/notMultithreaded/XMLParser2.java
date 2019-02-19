@@ -1,26 +1,29 @@
 package notMultithreaded;
 
-import java.io.File;
+import static java.lang.Math.exp;
+
+import java.io.IOException;
+import java.io.StringReader;
+
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.DocumentBuilder;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 
 public class XMLParser2 {
 	static StringBuilder sb = new StringBuilder();
+	static String country;
 
-	public static void main(String[] args) {
+	public XMLParser2(String stn) throws ParserConfigurationException, SAXException, IOException {
 		new hashMapCountries();
-		try {
-			File inputFile = new File("data.csv");
-			if (inputFile.exists()) {
-				System.out.println("Start timer");
-				long startTime = System.currentTimeMillis(); // Tijd wordt bijgehouden van hoelang het programma runt
 				DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 				DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-				Document doc = dBuilder.parse(inputFile);
+				Document doc = dBuilder.parse(new InputSource(new StringReader(stn)));
 				doc.getDocumentElement().normalize();
 				NodeList nList = doc.getElementsByTagName("MEASUREMENT");
 
@@ -34,6 +37,7 @@ public class XMLParser2 {
 									eElement.getElementsByTagName("TEMP").item(0).getTextContent(),
 									eElement.getElementsByTagName("DEWP").item(0).getTextContent(),
 									eElement.getElementsByTagName("TIME").item(0).getTextContent(),
+									eElement.getElementsByTagName("DATE").item(0).getTextContent(),
 									hashMapCountries.getCountry(Integer
 											.parseInt(eElement.getElementsByTagName("STN").item(0).getTextContent())));
 						}
@@ -41,19 +45,19 @@ public class XMLParser2 {
 				}
 				new writeToTXT(sb.toString());
 				sb = new StringBuilder();
-				long endTime = System.currentTimeMillis(); // stop de tijd voor het bijhouden van hoelang het programma
-															// runt
-				System.out.println("That took " + (endTime - startTime) + " milliseconds"); // Zet de tijd van hoelang
-																							// het
-			} // programma runt in de Terminal
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
 	}
 
-	public static void sendData(String stn, String temp, String dewp, String time, String country) {
-		sb.append(stn + "," + temp + "," + dewp + "," + time + "," + country + "\r\n");
+	public static void sendData(String stn, String temp, String dewp, String time, String date,  String country) {
+		if (dewp.isEmpty()) {
+			dewp = "0.0";
+		}
+		sb.append(stn + "," + temp + "," + date + "," + time + "," + country + "," + reHumidity(dewp,temp) + "\r\n");
 		// System.out.println(stn + temp + dewp + time + country);
+	}
+	
+	public static double reHumidity(String DEWP, String TEMP) {
+		//calculates the relative humidity using dewpoint and temperature
+		double ReHum = 100*(exp((17.625*Double.parseDouble(DEWP))/(243.04+Double.parseDouble(DEWP)))/exp((17.625*Double.parseDouble(TEMP))/(243.04+Double.parseDouble(TEMP))));
+		return ReHum;
 	}
 }

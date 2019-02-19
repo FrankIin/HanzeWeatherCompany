@@ -4,7 +4,7 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 
 public class writeToTXT {
-	String filepath = "csvDataa.txt";
+	String filepath = "data.csv";
 
 	public writeToTXT(String stn) {
 		try {

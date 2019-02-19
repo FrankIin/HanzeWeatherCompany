@@ -1,13 +1,13 @@
 package generator;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 
 public class writeToTXT {
-	static String filepath = "XMLdata.txt";
+	static String filepath = "data.txt";
 	static PrintWriter pw;
-	
+	StringBuilder sb = new StringBuilder();
+
 	public writeToTXT(String stn) {
 		try {
 			FileWriter fw = new FileWriter(filepath, true);
@@ -16,24 +16,12 @@ public class writeToTXT {
 			pw.println(stn);
 			pw.flush();
 			pw.close();
-			renameFile();
+
+
 
 		} catch (Exception e) {
 			System.out.println(stn + " niet verstuurd!");
 		}
 	}
-	
-	public static void renameFile()
-	{
-	     //absolute path rename file
-        File file = new File("XMLdata.txt");
-        File newFile = new File("XML.txt");
-        if(file.renameTo(newFile)){
-            //System.out.println("File rename success");;
-			new Runner();
-        }else{
-            System.out.println("File rename failed");
-        }
-	}
-	
+
 }
