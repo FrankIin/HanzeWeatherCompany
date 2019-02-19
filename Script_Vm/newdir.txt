@@ -1,0 +1,3 @@
+#!/bin/bash
+
+mkdir -p /home/rasppi/ftp/weatherdata/auto_update/"$(date +%Y-%m-%d)" && chown rasppi:rasppi /home/rasppi/ftp/weatherdata/*
