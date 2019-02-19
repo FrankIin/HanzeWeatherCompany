@@ -1,0 +1,3 @@
+#! /bin/bash
+
+mkdir /home/rasppi/ftp/weatherdata/average_hour/"$(date +%Y-%m-%d)"/"$(date +%H:%M)"/
